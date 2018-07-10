@@ -110,7 +110,7 @@
   }
 
 })();
-
+// side exercise
 (function () {
 
   document.write(my_function(5) + "<br>");
@@ -123,5 +123,5 @@
     x.push(n, my_function(n-1));
     return x.slice(',').reverse().join(' ').toString();
   }
-  
+
 })();
