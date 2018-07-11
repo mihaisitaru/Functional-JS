@@ -125,3 +125,73 @@
   }
 
 })();
+
+(function () {
+  function isOdd(val) {
+    return val % 2 == 1;
+  }
+
+  function isEven(val) {
+    return !isOdd(val);
+  }
+
+  document.write([1,2,3,4,5,6,7,8,9].filter(isOdd) + "<br>");
+  document.write([1,2,3,4,5,6,7,8,9].filter(isEven) + "<br>");
+})();
+
+(function () {
+  function mult(x,y) {return x * y;}
+  function isOdd(val) {return val % 2 == 1;}
+  function isEven(val) {return val % 2 == 0;}
+
+  document.write([1,2,3,4,5,6,7,8,9].filter(isOdd).reduce(mult) + "<br>");
+  document.write([1,2,3,4,5,6,7,8,9].filter(isEven).reduce(mult) + "<br>");
+  document.write([1,2,3,4,5,6,7,8,9].reduce(mult) + "<br>");
+})();
+
+(function () {
+  function logvalue(val) {console.log(val); }
+
+  [1,2,3,4,5].forEach(logvalue);
+})();
+
+(function () {
+
+  document.write(add2(one(1), one(2)) + "<br>");
+  document.write(addn(one(10), one(20), one(30), one(40)) + "<br>");
+  document.write(addn(...[10,20,30,40].map(one)) + "<br>");
+
+  var array = [10,20,30,40,1,3,5,7]
+      .filter(isEven)
+      .map(one);
+
+  function one (x) {
+    return function() {
+      return x;
+    }
+  }
+
+  function add(x, y) {
+    return x + y;
+  }
+
+  function add2(fn1, fn2) {
+      return add(fn1(), fn2());
+  }
+
+  function addn(...arr) {
+      return arr
+        .reduce(function(prev,current){
+          return function() {
+            return add2(prev, current);
+          };
+        },one(0))();
+  }
+
+  function isEven(x) {
+    return x % 2 == 0;
+  }
+
+document.write(addn(...array) + "<br>");
+
+})();
